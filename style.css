@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  padding: 2rem;
+}
+
+/* Main Container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #0a3d62;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #1e272e;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 120px;
+}
+
+select {
+  max-width: 100px;
+}
+
+/* Buttons */
+button {
+  padding: 8px 16px;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  background-color: #0a3d62;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #1e90ff;
+}
+
+.delete-row {
+  background-color: #ff4d4d;
+}
+
+.delete-row:hover {
+  background-color: #ff1a1a;
+}
+
+/* Results */
+.result-box {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* CGPA Input Fields */
+#cgpa-section input {
+  margin: 0.5rem 1rem 0.5rem 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  th,
+  td {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
