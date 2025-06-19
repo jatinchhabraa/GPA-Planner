@@ -1,0 +1,1 @@
+# Thapar-CGPA-Calculator
