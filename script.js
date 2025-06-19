@@ -23,7 +23,7 @@ document.getElementById("add-row").addEventListener("click", () => {
   tableBody.appendChild(newRow);
   addDeleteListeners(); // Ensure new delete buttons work
   addLiveListeners(); // Add live calculation listeners
-  calculateLiveSGPA(); // Recalculate after new row
+  calculateLiveSGPA(Infinity); // Recalculate after new row
 });
 
 // Delete a course row
@@ -32,39 +32,70 @@ function addDeleteListeners() {
   deleteButtons.forEach((btn) => {
     btn.onclick = () => {
       btn.parentElement.parentElement.remove();
-      calculateLiveSGPA(); // Recalculate SGPA after deletion
+      calculateLiveSGPA(Infinity); // Recalculate SGPA after deletion
     };
   });
 }
 addDeleteListeners(); // Initial call
 
 // Live SGPA calculation
-function calculateLiveSGPA() {
+function calculateLiveSGPA(validateUntil = Infinity) {
   const creditInputs = document.querySelectorAll(".credit-input");
   const gradeSelects = document.querySelectorAll(".grade-select");
 
   let totalPoints = 0;
   let totalCredits = 0;
+  let warnings = [];
 
+  // Clear old borders
+  creditInputs.forEach((input) => (input.style.border = ""));
+  gradeSelects.forEach((select) => (select.style.border = ""));
   for (let i = 0; i < creditInputs.length; i++) {
     const credit = parseFloat(creditInputs[i].value);
     const gradePoint = parseFloat(gradeSelects[i].value);
 
-    if (!isNaN(credit) && !isNaN(gradePoint)) {
-      totalCredits += credit;
-      totalPoints += credit * gradePoint;
+    // Skip validation for current/future rows
+    if (validateUntil !== Infinity && i >= validateUntil) {
+      if (!isNaN(credit) && !isNaN(gradePoint)) {
+        totalCredits += credit;
+        totalPoints += credit * gradePoint;
+      }
+      continue;
     }
+
+    // ✅ Validate only previous rows
+    let isInvalid = false;
+
+    if (isNaN(credit)) {
+      creditInputs[i].style.border = "2px solid red";
+      isInvalid = true;
+    }
+    if (isNaN(gradePoint)) {
+      gradeSelects[i].style.border = "2px solid red";
+      isInvalid = true;
+    }
+
+    if (isInvalid) {
+      warnings.push(`Row ${i + 1}: Missing credit or grade`);
+      continue;
+    }
+
+    totalCredits += credit;
+    totalPoints += credit * gradePoint;
   }
 
-  const resultBox = document.getElementById("sgpa-result");
+  const sgpaBox = document.getElementById("sgpa-result");
+  const warningBox = document.getElementById("sgpa-warning");
 
   if (totalCredits === 0) {
-    resultBox.innerText = `Waiting for valid inputs...`;
+    sgpaBox.innerText = `Waiting for valid inputs...`;
+    warningBox.innerHTML = warnings.join("<br>");
     return;
   }
 
   const sgpa = (totalPoints / totalCredits).toFixed(2);
-  resultBox.innerText = `Your SGPA is: ${sgpa}`;
+  sgpaBox.innerText = `Your SGPA is: ${sgpa}`;
+  warningBox.innerHTML = warnings.join("<br>");
 }
 
 // Add real-time listeners to all inputs
@@ -72,16 +103,19 @@ function addLiveListeners() {
   const creditInputs = document.querySelectorAll(".credit-input");
   const gradeSelects = document.querySelectorAll(".grade-select");
 
-  creditInputs.forEach((input) =>
-    input.addEventListener("input", calculateLiveSGPA)
-  );
+  creditInputs.forEach((input, index) => {
+    input.addEventListener("input", () => calculateLiveSGPA(index));
+    input.addEventListener("focus", () => calculateLiveSGPA(index));
+  });
 
-  gradeSelects.forEach((select) =>
-    select.addEventListener("change", calculateLiveSGPA)
-  );
+  gradeSelects.forEach((select, index) => {
+    select.addEventListener("change", () => calculateLiveSGPA(index));
+    select.addEventListener("focus", () => calculateLiveSGPA(index));
+  });
 }
+
 addLiveListeners();
-calculateLiveSGPA(); // Show initial result
+calculateLiveSGPA(Infinity); // Show initial result
 
 // Calculate CGPA (on button click only)
 document.getElementById("calculate-cgpa").addEventListener("click", () => {
