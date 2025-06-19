@@ -156,3 +156,22 @@ document.getElementById("calculate-cgpa").addEventListener("click", () => {
   const cgpa = (totalPoints / totalCredits).toFixed(2);
   document.getElementById("cgpa-result").innerText = `Your CGPA is: ${cgpa}`;
 });
+
+// --- Dark Mode Toggle ---
+const themeToggle = document.getElementById("theme-toggle");
+const currentTheme = localStorage.getItem("theme");
+
+// Apply saved theme on load
+if (currentTheme === "dark") {
+  document.body.classList.add("dark");
+  themeToggle.innerText = "☀️ Light Mode";
+}
+
+// Toggle theme on click
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const isDark = document.body.classList.contains("dark");
+
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+  themeToggle.innerText = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+});

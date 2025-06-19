@@ -63,6 +63,8 @@ select {
   border: 1px solid #ccc;
   width: 100%;
   max-width: 120px;
+  background-color: white;
+  color: black;
 }
 
 select {
@@ -122,4 +124,91 @@ button:hover {
   h1 {
     font-size: 1.5rem;
   }
+}
+
+/* DARK MODE */
+body.dark {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark .container {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark label {
+  color: #ffffff;
+}
+
+body.dark .result-box {
+  color: #f1f1f1;
+}
+
+/* Input fields styling */
+body.dark input,
+body.dark select {
+  background-color: #1e1e1e !important;
+  color: #f0f0f0 !important;
+  border: 1px solid #444;
+}
+
+/* Specific typed input types */
+body.dark input[type="text"],
+body.dark input[type="number"],
+body.dark input[type="search"],
+body.dark textarea {
+  background-color: #1e1e1e !important;
+  color: #f0f0f0 !important;
+}
+
+/* Placeholder fix */
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #bbbbbb;
+}
+
+/* Select dropdown styling */
+body.dark select {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+/* Default option */
+body.dark select option[value=""] {
+  color: #999999;
+}
+
+/* Dropdown options styling */
+body.dark select option {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+/* Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #e0e0e0; /* darker gray for visibility */
+  color: #333; /* dark text */
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .theme-toggle {
+  background-color: #333;
+  color: white;
+}
+/* Fix table headers in dark mode */
+body.dark th {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-bottom: 1px solid #444;
 }
