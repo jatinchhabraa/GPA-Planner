@@ -13,6 +13,7 @@ body {
 
 /* Main Container */
 .container {
+  position: relative; /* important for absolute toggle button */
   max-width: 900px;
   margin: auto;
   background: #fff;
@@ -24,6 +25,7 @@ body {
 /* Headings */
 h1 {
   text-align: center;
+  margin-top: 3.5rem; /* Add margin to push below toggle */
   margin-bottom: 2rem;
   font-size: 2rem;
   color: #0a3d62;
@@ -41,6 +43,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
+  overflow-x: auto;
 }
 
 th,
@@ -58,29 +61,30 @@ th {
 input[type="text"],
 input[type="number"],
 select {
-  padding: 8px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   width: 100%;
-  max-width: 120px;
+  max-width: 100%;
   background-color: white;
   color: black;
+  font-size: 16px;
 }
 
 select {
-  max-width: 100px;
+  max-width: 100%;
 }
 
 /* Buttons */
 button {
-  padding: 8px 16px;
+  padding: 12px 16px;
   margin: 0.5rem 0.5rem 0.5rem 0;
   background-color: #0a3d62;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: background 0.3s ease;
 }
 
@@ -110,19 +114,39 @@ button:hover {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  th,
-  td {
-    font-size: 0.85rem;
-    padding: 8px;
-  }
-
-  button {
-    font-size: 0.8rem;
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
   }
 
   h1 {
     font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  th,
+  td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  input,
+  select {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .result-box {
+    font-size: 1rem;
   }
 }
 
@@ -147,7 +171,6 @@ body.dark .result-box {
   color: #f1f1f1;
 }
 
-/* Input fields styling */
 body.dark input,
 body.dark select {
   background-color: #1e1e1e !important;
@@ -155,73 +178,59 @@ body.dark select {
   border: 1px solid #444;
 }
 
-/* Specific typed input types */
-body.dark input[type="text"],
-body.dark input[type="number"],
-body.dark input[type="search"],
-body.dark textarea {
-  background-color: #1e1e1e !important;
-  color: #f0f0f0 !important;
-}
-
-/* Placeholder fix */
 body.dark input::placeholder,
 body.dark textarea::placeholder {
   color: #bbbbbb;
 }
 
-/* Select dropdown styling */
-body.dark select {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-}
-
-/* Default option */
-body.dark select option[value=""] {
-  color: #999999;
-}
-
-/* Dropdown options styling */
 body.dark select option {
   background-color: #1e1e1e;
   color: #f0f0f0;
 }
 
+body.dark select option[value=""] {
+  color: #999999;
+}
+
 /* Toggle Button */
 .theme-toggle {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #e0e0e0; /* darker gray for visibility */
-  color: #333; /* dark text */
+  top: 1rem;
+  right: 1rem;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
   border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.9rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
 }
 
+/* Optional: when dark mode is enabled */
 body.dark .theme-toggle {
-  background-color: #333;
+  background-color: #444;
   color: white;
 }
-/* Fix table headers in dark mode */
+
 body.dark th {
   background-color: #2a2a2a;
   color: #f0f0f0;
   border-bottom: 1px solid #444;
 }
 
+/* Clear Saved Button */
 button.clear-storage {
-  background-color: #e74c3c; /* deep red */
+  background-color: #e74c3c;
   color: white;
   font-weight: 600;
-  padding: 10px 16px;
+  padding: 12px 18px;
   border: none;
   border-radius: 8px;
-  font-size: 15px;
-  display: flex;
+  font-size: 16px;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
