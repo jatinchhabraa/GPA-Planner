@@ -8,10 +8,11 @@
   </head>
   <body>
     <div class="container">
-      <button id="theme-toggle" class="theme-toggle">🌙 Dark Mode</button>
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
 
       <h1>Thapar University SGPA & CGPA Calculator</h1>
 
+      <!-- SGPA Section -->
       <section id="sgpa-section">
         <h2>SGPA Calculator</h2>
         <table id="course-table">
@@ -46,22 +47,72 @@
         </table>
         <button id="add-row">+ Add Course</button>
         <button id="calculate-sgpa">Calculate SGPA</button>
-
         <div id="sgpa-result" class="result-box"></div>
         <div id="sgpa-warning" class="result-box" style="color: #e67e22"></div>
       </section>
 
       <hr />
 
+      <!-- CGPA Section -->
       <section id="cgpa-section">
         <h2>CGPA Calculator</h2>
+        <label>Current CGPA:</label>
+        <input type="number" id="current-cgpa" min="0" step="0.01" max="10" />
+
         <label>Total Credits Till Previous Sem:</label>
         <input type="number" id="prev-credits" min="0" step="0.5" />
-        <label>Total Points Till Previous Sem:</label>
-        <input type="number" id="prev-points" min="0" step="0.5" />
-        <button id="calculate-cgpa">Calculate CGPA</button>
 
+        <button id="calculate-cgpa">Calculate CGPA</button>
         <div id="cgpa-result" class="result-box"></div>
+      </section>
+
+      <hr />
+
+      <!-- GPA Improvement Planner Section -->
+      <section id="planner-section">
+        <h2>🎯 CGPA Improvement Planner</h2>
+        <label>Current CGPA:</label>
+        <input type="number" id="current-cgpa" step="0.01" min="0" max="10" />
+
+        <label>Total Credits Till Now:</label>
+        <input type="number" id="current-total-credits" min="0" />
+
+        <label>Target CGPA After Next Sem:</label>
+        <input type="number" id="target-cgpa" step="0.01" min="0" max="10" />
+
+        <label>Next Semester Total Credits:</label>
+        <input type="number" id="next-sem-credits" min="1" />
+
+        <button id="calculate-target-sgpa">Calculate Required SGPA</button>
+        <div id="target-sgpa-result" class="result-box"></div>
+
+        <h2 style="margin-top: 2rem">🎯 SGPA Planner</h2>
+        <label>Current CGPA:</label>
+        <input
+          type="number"
+          id="rev-current-cgpa"
+          step="0.01"
+          min="0"
+          max="10"
+        />
+
+        <label>Total Credits Till Now:</label>
+        <input type="number" id="rev-current-total-credits" min="0" />
+
+        <label>Expected SGPA (Next Sem):</label>
+        <input
+          type="number"
+          id="rev-expected-sgpa"
+          step="0.01"
+          min="0"
+          max="10"
+        />
+
+        <label>Next Semester Credits:</label>
+        <input type="number" id="rev-next-sem-credits" min="1" />
+
+        <button id="calculate-reverse-cgpa">Calculate New CGPA</button>
+        <div id="reverse-cgpa-result" class="result-box"></div>
       </section>
     </div>
 
