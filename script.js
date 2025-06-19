@@ -1,3 +1,45 @@
+function loadFromLocalStorage() {
+  const savedData = localStorage.getItem("sgpa_cgpa_data");
+  if (!savedData) return;
+
+  const parsed = JSON.parse(savedData);
+  const tableBody = document.getElementById("course-body");
+
+  // Clear all existing rows except one
+  tableBody.innerHTML = "";
+
+  parsed.courses.forEach((row) => {
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+        <td><input type="text" placeholder="Course Name" value="${row.name}"></td>
+        <td><input type="number" class="credit-input" min="0" step="0.5" value="${row.credit}"></td>
+        <td>
+          <select class="grade-select">
+            <option value="">--Select--</option>
+            <option value="10">A</option>
+            <option value="9">A-</option>
+            <option value="8">B</option>
+            <option value="7">B-</option>
+            <option value="5">C</option>
+            <option value="2">E</option>
+          </select>
+        </td>
+        <td><button class="delete-row">Delete</button></td>
+      `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector("select").value = row.grade;
+  });
+
+  document.getElementById("current-cgpa").value =
+    parsed.cgpaInfo.currentCgpa || "";
+  document.getElementById("prev-credits").value =
+    parsed.cgpaInfo.prevCredits || "";
+
+  addDeleteListeners();
+  addLiveListeners();
+  calculateLiveSGPA();
+}
+
 // Add a new course row
 document.getElementById("add-row").addEventListener("click", () => {
   const tableBody = document.getElementById("course-body");
@@ -33,6 +75,7 @@ function addDeleteListeners() {
     btn.onclick = () => {
       btn.parentElement.parentElement.remove();
       calculateLiveSGPA(Infinity); // Recalculate SGPA after deletion
+      saveToLocalStorage(); // update storage after delete
     };
   });
 }
@@ -102,16 +145,35 @@ function calculateLiveSGPA(validateUntil = Infinity) {
 function addLiveListeners() {
   const creditInputs = document.querySelectorAll(".credit-input");
   const gradeSelects = document.querySelectorAll(".grade-select");
+  const nameInputs = document.querySelectorAll('input[type="text"]');
 
   creditInputs.forEach((input, index) => {
-    input.addEventListener("input", () => calculateLiveSGPA(index));
+    input.addEventListener("input", () => {
+      calculateLiveSGPA(index);
+      saveToLocalStorage();
+    });
     input.addEventListener("focus", () => calculateLiveSGPA(index));
   });
 
   gradeSelects.forEach((select, index) => {
-    select.addEventListener("change", () => calculateLiveSGPA(index));
+    select.addEventListener("change", () => {
+      calculateLiveSGPA(index);
+      saveToLocalStorage();
+    });
     select.addEventListener("focus", () => calculateLiveSGPA(index));
   });
+
+  nameInputs.forEach((input) => {
+    input.addEventListener("input", saveToLocalStorage);
+  });
+
+  // Also track CGPA input fields
+  document
+    .getElementById("current-cgpa")
+    .addEventListener("input", saveToLocalStorage);
+  document
+    .getElementById("prev-credits")
+    .addEventListener("input", saveToLocalStorage);
 }
 
 addLiveListeners();
@@ -254,3 +316,37 @@ document
 
     resultBox.innerText = `📈 Your new CGPA after next semester will be: ${newCGPA}`;
   });
+
+function saveToLocalStorage() {
+  const courseRows = [];
+  const creditInputs = document.querySelectorAll(".credit-input");
+  const gradeSelects = document.querySelectorAll(".grade-select");
+  const nameInputs = document.querySelectorAll('input[type="text"]');
+
+  for (let i = 0; i < creditInputs.length; i++) {
+    courseRows.push({
+      name: nameInputs[i].value,
+      credit: creditInputs[i].value,
+      grade: gradeSelects[i].value,
+    });
+  }
+
+  const currentCgpa = document.getElementById("current-cgpa").value;
+  const prevCredits = document.getElementById("prev-credits").value;
+
+  const data = {
+    courses: courseRows,
+    cgpaInfo: {
+      currentCgpa,
+      prevCredits,
+    },
+  };
+
+  localStorage.setItem("sgpa_cgpa_data", JSON.stringify(data));
+}
+function clearSavedData() {
+  localStorage.removeItem("sgpa_cgpa_data");
+  location.reload(); // Refresh to reflect cleared state
+}
+
+loadFromLocalStorage(); // <-- auto run

@@ -212,3 +212,27 @@ body.dark th {
   color: #f0f0f0;
   border-bottom: 1px solid #444;
 }
+
+button.clear-storage {
+  background-color: #e74c3c; /* deep red */
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button.clear-storage:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+}
+
+button.clear-storage:active {
+  transform: translateY(0);
+}
