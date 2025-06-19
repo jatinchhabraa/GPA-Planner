@@ -1,3 +1,9 @@
+html,
+body {
+  width: 100%;
+  overflow-x: hidden; /* prevent horizontal scroll */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,13 +19,20 @@ body {
 
 /* Main Container */
 .container {
-  position: relative; /* important for absolute toggle button */
+  position: relative; /* important for absolutely positioned toggle button */
   max-width: 900px;
-  margin: auto;
+  width: 100%; /* <-- add this to prevent overflow */
+  margin: 0 auto;
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box; /* ensures padding doesn't add to width */
+  overflow-x: hidden; /* optional safeguard */
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
 }
 
 /* Headings */

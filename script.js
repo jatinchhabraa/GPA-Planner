@@ -30,7 +30,7 @@ function loadFromLocalStorage() {
     newRow.querySelector("select").value = row.grade;
   });
 
-  document.getElementById("current-cgpa").value =
+  document.getElementById("cgpa-calc-current-cgpa").value =
     parsed.cgpaInfo.currentCgpa || "";
   document.getElementById("prev-credits").value =
     parsed.cgpaInfo.prevCredits || "";
@@ -169,7 +169,7 @@ function addLiveListeners() {
 
   // Also track CGPA input fields
   document
-    .getElementById("current-cgpa")
+    .getElementById("cgpa-calc-current-cgpa")
     .addEventListener("input", saveToLocalStorage);
   document
     .getElementById("prev-credits")
@@ -181,7 +181,9 @@ calculateLiveSGPA(Infinity); // Show initial result
 
 // Calculate CGPA (on button click only)
 document.getElementById("calculate-cgpa").addEventListener("click", () => {
-  const currentCgpa = parseFloat(document.getElementById("current-cgpa").value);
+  const currentCgpa = parseFloat(
+    document.getElementById("cgpa-calc-current-cgpa").value
+  );
   const prevCredits = parseFloat(document.getElementById("prev-credits").value);
 
   const creditInputs = document.querySelectorAll(".credit-input");
@@ -238,19 +240,30 @@ themeToggle.addEventListener("click", () => {
 document
   .getElementById("calculate-target-sgpa")
   .addEventListener("click", () => {
-    const currentCGPA = parseFloat(
-      document.getElementById("current-cgpa").value
-    );
-    const totalCredits = parseFloat(
-      document.getElementById("current-total-credits").value
-    );
-    const nextSemCredits = parseFloat(
-      document.getElementById("next-sem-credits").value
-    );
-    const targetCGPA = parseFloat(document.getElementById("target-cgpa").value);
-
     const resultBox = document.getElementById("target-sgpa-result");
 
+    // Safely get values and guard against null
+    const cgpaInput = document.getElementById("planner-current-cgpa");
+    const totalCreditsInput = document.getElementById("current-total-credits");
+    const nextCreditsInput = document.getElementById("next-sem-credits");
+    const targetCgpaInput = document.getElementById("target-cgpa");
+
+    if (
+      !cgpaInput ||
+      !totalCreditsInput ||
+      !nextCreditsInput ||
+      !targetCgpaInput
+    ) {
+      resultBox.innerText = "❌ Some input fields are missing from the page.";
+      return;
+    }
+
+    const currentCGPA = parseFloat(cgpaInput.value.trim());
+    const totalCredits = parseFloat(totalCreditsInput.value.trim());
+    const nextSemCredits = parseFloat(nextCreditsInput.value.trim());
+    const targetCGPA = parseFloat(targetCgpaInput.value.trim());
+
+    // Validate
     if (
       isNaN(currentCGPA) ||
       isNaN(totalCredits) ||
@@ -266,10 +279,9 @@ document
     const currentPoints = currentCGPA * totalCredits;
     const requiredTotalPoints = targetCGPA * (totalCredits + nextSemCredits);
     const requiredNextSemPoints = requiredTotalPoints - currentPoints;
-
     const requiredSGPA = requiredNextSemPoints / nextSemCredits;
 
-    if (requiredSGPA > 10) {
+    if (requiredSGPA > 10.0001) {
       resultBox.innerText = `🚫 Target CGPA of ${targetCGPA} is not achievable with max SGPA 10.`;
     } else {
       resultBox.innerText = `🎯 You need an SGPA of at least ${requiredSGPA.toFixed(
@@ -331,7 +343,7 @@ function saveToLocalStorage() {
     });
   }
 
-  const currentCgpa = document.getElementById("current-cgpa").value;
+  const currentCgpa = document.getElementById("cgpa-calc-current-cgpa").value;
   const prevCredits = document.getElementById("prev-credits").value;
 
   const data = {
