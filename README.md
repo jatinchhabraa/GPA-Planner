@@ -57,7 +57,7 @@ A modern, responsive web app to calculate **SGPA**, **CGPA**, and **plan GPA imp
 
 ## 🧑‍💻 Author
 
-Created with 💙 by [Jatin Chhabra](https://github.com/jatinchhabra)
+Created with 💙 by [Jatin Chhabra](https://github.com/jatinchhabraa)
 
 - 🔗 [LinkedIn](https://www.linkedin.com/in/106-jatinchhabra/)
 - 📬 [Email](mailto:jatinchhabra.tech@gmail.com)
