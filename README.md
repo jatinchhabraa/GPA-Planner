@@ -2,27 +2,37 @@
 
 A modern, responsive web app to calculate **SGPA**, **CGPA**, and **plan GPA improvement** for Thapar University students. Built using **HTML, CSS, and JavaScript**, with support for **dark mode** and **local data saving**.
 
+> 📍 Designed for students at **Thapar University** (but useful for all!).
+
 ---
 
 ## 🚀 Features
 
-- ✅ SGPA Calculator (with grade & credit inputs)
-- ✅ CGPA Calculator (previous + current semester logic)
-- ✅ 🎯 CGPA Improvement Planner (plan SGPA needed to hit a target CGPA)
-- ✅ 📈 SGPA Planner (predict future CGPA based on expected SGPA)
-- 🌙 Dark Mode support
-- 💾 Auto-saves data using localStorage
-- 🗑️ Clear Data Button
+- 🎯 **SGPA Calculator**  
+  Add subjects, grades, and credits to compute semester GPA in real-time.
+
+- 📚 **CGPA Calculator**  
+  Combine past CGPA and current semester results to get updated CGPA.
+
+- 📈 **CGPA Improvement Planner**  
+  Enter your target CGPA and get the SGPA required next semester to reach it.
+
+- 🧮 **SGPA Impact Planner**  
+  Enter expected SGPA and see what your CGPA will be after next semester.
+
+- 🌗 **Dark Mode Toggle**  
+  Switch between light/dark mode easily.
+
+- 💾 **Auto Save in Browser**  
+  Inputs are saved in `localStorage` so you don’t lose progress on reload.
 
 ---
 
 ## 📸 Preview
 
-![Screenshot of GPA Calculator](screenshot.png) <!-- Add a real screenshot or remove this section -->
-
 ---
 
-## 🛠️ Technologies
+## 🖥️ Tech Stack
 
 - HTML5
 - CSS3 (Responsive Design + Dark Mode)
@@ -49,7 +59,7 @@ A modern, responsive web app to calculate **SGPA**, **CGPA**, and **plan GPA imp
 
 Created with 💙 by [Jatin Chhabra](https://github.com/jatinchhabra)
 
-- 🔗 [LinkedIn](https://linkedin.com/in/jatinchhabra)
+- 🔗 [LinkedIn](https://www.linkedin.com/in/106-jatinchhabra/)
 - 📬 [Email](mailto:jatinchhabra.tech@gmail.com)
 
 ---
