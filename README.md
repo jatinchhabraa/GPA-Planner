@@ -30,6 +30,14 @@ A modern, responsive web app to calculate **SGPA**, **CGPA**, and **plan GPA imp
 
 ## 📸 Preview
 
+### 📌 SGPA & CGPA Calculator
+
+![SGPA Calculator](./images/image1.png)
+
+### 📈 CGPA Planner
+
+![CGPA Planner](./images/image2.png)
+
 ---
 
 ## 🖥️ Tech Stack
@@ -42,22 +50,23 @@ A modern, responsive web app to calculate **SGPA**, **CGPA**, and **plan GPA imp
 
 ## 📡 Live Demo
 
-[🌐 View Online Now](https://cgpa-buddy.netlify.app/)
+[🌐 Click here to try it out](https://cgpa-buddy.netlify.app/)
 
 ---
 
 ## 🧠 How to Use
 
-1. Fill in your course names, credits, and grades.
-2. Click **"Calculate SGPA"**.
-3. Add your previous CGPA and credits to get updated **CGPA**.
-4. Use the **Planner tools** to see what grades you need to reach your target.
+1. Enter your course names, credits, and grades → Click **"Calculate SGPA"**.
+2. Input current CGPA and total previous credits → Click **"Calculate CGPA"**.
+3. Try the **Planner tools** to:
+   - See what SGPA is required to hit a target CGPA.
+   - See the updated CGPA based on your next semester's expected SGPA.
 
 ---
 
 ## 🧑‍💻 Author
 
-Created with 💙 by [Jatin Chhabra](https://github.com/jatinchhabraa)
+👨‍🎓 Jatin Chhabra
 
 - 🔗 [LinkedIn](https://www.linkedin.com/in/106-jatinchhabra/)
 - 📬 [Email](mailto:jatinchhabra.tech@gmail.com)
@@ -65,8 +74,6 @@ Created with 💙 by [Jatin Chhabra](https://github.com/jatinchhabraa)
 ---
 
 ## 🧾 License
-
-## License
 
 This project is licensed under the MIT License.
 
