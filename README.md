@@ -42,7 +42,7 @@ A modern, responsive web app to calculate **SGPA**, **CGPA**, and **plan GPA imp
 
 ## 📡 Live Demo
 
-[🌐 View Online Now](https://yourusername.github.io/gpa-calculator)
+[🌐 View Online Now](https://cgpa-buddy.netlify.app/)
 
 ---
 
@@ -65,3 +65,11 @@ Created with 💙 by [Jatin Chhabra](https://github.com/jatinchhabraa)
 ---
 
 ## 🧾 License
+
+## License
+
+This project is licensed under the MIT License.
+
+You are free to use, modify, and distribute this code, but please provide proper credit by linking back to this repository or mentioning the original author.
+
+© 2025 Jatin Chhabra
